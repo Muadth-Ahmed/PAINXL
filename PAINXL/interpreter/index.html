@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAINXL Web Interpreter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/codemirror@5.65.5/lib/codemirror.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      #editor {
+        flex: 1;
+      }
+      #terminal {
+        height: 200px;
+        background: #1e1e1e;
+        border-top: 2px solid #333;
+        padding: 10px;
+        overflow-y: auto;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+      #inputLine {
+        display: flex;
+      }
+      #inputLine span {
+        margin-right: 5px;
+      }
+      #inputLine input {
+        flex: 1;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border: none;
+        outline: none;
+        font-family: monospace;
+      }
+      button {
+        background-color: #0e639c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div>
+      <button id="runBtn">Run</button>
+    </div>
+    <div id="terminal"></div>
+    <div id="inputLine">
+      <span>&gt;</span><input id="terminalInput" autocomplete="off" />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.5/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.5/mode/javascript/javascript.js"></script>
+
+    <script>
+      // Setup CodeMirror editor
+      const editor = CodeMirror(document.getElementById("editor"), {
+        lineNumbers: true,
+        mode: "text/plain",
+        theme: "default",
+        value: ``,
+      });
+
+      // Terminal elements
+      const terminal = document.getElementById("terminal");
+      const terminalInput = document.getElementById("terminalInput");
+
+      // Tape for PAINXL
+      const TAPE_SIZE = 300000;
+      let tape = new Uint8Array(TAPE_SIZE);
+      let ptr = 0;
+
+      // Queue for stdin input
+      let inputQueue = [];
+
+      // Run PAINXL code
+      function runPAINXL(code) {
+        // Filter only 0 and 1 characters
+        const filteredCode = code.replace(/[^01]/g, "");
+        const commands = filteredCode.match(/([01]{8})/g) || [];
+        let pc = 0;
+
+        function promptInput(callback) {
+          terminalInput.disabled = false;
+          terminalInput.focus();
+          terminalInput.onkeydown = (e) => {
+            if (e.key === "Enter") {
+              const value = terminalInput.value;
+              inputQueue.push(value.charCodeAt(0));
+              terminalInput.value = "";
+              terminalInput.disabled = true;
+              callback();
+            }
+          };
+        }
+
+        function executeNext() {
+          if (pc >= commands.length) return;
+          const cmd = commands[pc];
+
+          switch (cmd) {
+            case "01001001":
+              ptr++;
+              break;
+            case "10101001":
+              ptr--;
+              break;
+            case "00100101":
+              tape[ptr]++;
+              break;
+            case "10010101":
+              tape[ptr]--;
+              break;
+            case "11100001":
+              terminal.innerHTML += String.fromCharCode(tape[ptr]);
+              terminal.scrollTop = terminal.scrollHeight;
+              break;
+            case "00011101":
+              promptInput(() => {
+                tape[ptr] = inputQueue.shift() || 0;
+                pc++;
+                executeNext();
+              });
+              return; // wait for input
+            case "00101101":
+              tape[ptr] = 0;
+              break;
+            case "00000001":
+              if (tape[ptr] === 0) {
+                let depth = 1;
+                while (depth > 0) {
+                  pc++;
+                  if (pc >= commands.length) {
+                    alert("Unmatched loop start");
+                    return;
+                  }
+                  if (commands[pc] === "00000001") depth++;
+                  else if (commands[pc] === "11111101") depth--;
+                }
+              }
+              break;
+            case "11111101":
+              if (tape[ptr] !== 0) {
+                let depth = 1;
+                while (depth > 0) {
+                  pc--;
+                  if (pc < 0) {
+                    alert("Unmatched loop end");
+                    return;
+                  }
+                  if (commands[pc] === "11111101") depth++;
+                  else if (commands[pc] === "00000001") depth--;
+                }
+                pc--; // go back to loop start
+              }
+              break;
+            default:
+              terminal.innerHTML += `\nUnknown command: ${cmd}\n`;
+              break;
+          }
+          pc++;
+          setTimeout(executeNext, 0);
+        }
+
+        executeNext();
+      }
+
+      // Run button
+      document.getElementById("runBtn").addEventListener("click", () => {
+        tape.fill(0);
+        ptr = 0;
+        terminal.innerHTML = "";
+        runPAINXL(editor.getValue());
+      });
+    </script>
+  </body>
+</html>

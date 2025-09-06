@@ -1,0 +1,56 @@
+@import url(https://fonts.cdnfonts.com/css/cyber);
+body {
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", "Arial", "CYBER";
+  display: flex;
+  flex-direction: column;
+}
+img {
+  width: 50px;
+  height: fit-content;
+}
+a {
+  display: flex;
+  align-items: center;
+  flex: 1 1 100%;
+  flex-grow: none;
+  flex-shrink: none;
+  flex-basis: auto;
+  background-color: rgb(224, 224, 224);
+  border-radius: 6px;
+  transition: 0.5s;
+  margin-top: 2cm;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+#infoP {
+  font-family: "Arial", "Segoe UI", CYBER; /* looks good for code-like text */
+  white-space: pre-wrap; /* preserves spaces and newlines */
+  border: 1px solid /*#ccc*/;
+  padding: 10px;
+  width: 600px;
+  margin-top: 20px;
+  background: transparent /* #f9f9f9*/;
+  display: none;
+}
+
+title {
+  font-family: monospace; /* looks good for code-like text */
+  white-space: pre-wrap; /* preserves spaces and newlines */
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 600px;
+  margin-top: 20px;
+  background: #f9f9f9;
+}
+#generate {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+a img {
+  margin-left: 8px;
+}

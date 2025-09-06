@@ -1,0 +1,20 @@
+To learn EML you will need to know these commands: 
+
+
+01001001 (Move the pointer to the right)
+
+10101001 (Move the pointer to the left)
+
+00100101 (Increase the current cell by 1)
+
+10010101 (Decrease the current cell by 1)
+
+00000001 (Start a loop)
+
+11111101 (End a loop)
+
+00101101 (Set current cell to 0)
+
+00011101 (Get a character from the user)
+
+11100001 (Output an ASCII character)
