@@ -1,16 +1,18 @@
 ## PAINXL (Pointer-Advanced Impossible Nightmare eXecution Language) is an esoteric programming language created in 2025 by Muadth Ahmed. It was designed to be complex with minimal commands to challenge programmers and serve as the first step for anyone who wants to learn binary.\n\nFirst:\n\n  What are the commands in PAINXL, and what do you need to learn to use it?\n\nTo learn PAINXL, you will need to understand ASCII.\n\nCommands:\n\n\<br>## 01001001 (Move the pointer to the right)<br>0101001 (Move the pointer to the left)\n\n00100101 (Increase the current cell by 1)\n\n10010101 (Decrease the current cell by 1)\n\n00000001 (Start a loop)\n\n11111101 (End a loop)\n\n00101101 (Set current cell to 0)\n\n00011101 (Get a character from the user)\n\n11100001 (Output an ASCII character)\n\nHere is a simple code in PAINXL:<br><br>` PAINXL 0010010100100101001001010010010100100101001001010010010100100101001001010010010100000001010010010010010100100101001001010010010100100101001001010010010110101001100101011111110101001001001001010010010111100001`<br><br>
 ## You can use it on the web by following this link: https://painxl-lang.org/interpreter/  <br><br><br><br><br><br><br><br>
 ## 🔥 PAINXL IDE – Full Feature List (All for $1!) in https://painxl-lang.org<br><br>
-### 📝 Core Editor Features<br>
+### Core Editor Features<br>
 **📝Text Editor**  <br>
-2. **Run in Terminal and Editor Panel**  <br>3. **Find and Replace with `<Match Case>` Option**  <br>4. **Interpreter**  <br>5. **Compiler**  <br>6. **Autocomplete**  <br>
-7. **Settings Centre**<br><br>
+2. **📟Run in Terminal and Editor Panel**  <br>
+3. **🔍Find and Replace with `<Match Case>` Option**  <br>4. **⌨Interpreter**  <br>5. **⌨Compiler**  <br>6. **⌨️Autocomplete**  <br>
+7. **⚙Settings Centre**<br><br>
 ---
 <br><br>
-### 🤖 AI Features<br>8. **AI Chatbot**  <br>
-9. **AI Code Recommendation System**  <br>
-10. **AI-Powered Error Fix Suggestions**  <br>
-11. **AI Code Reviewer**  <br><br>
+### 🤖 AI Features<br>
+8. **✨AI Chatbot**  <br>
+9. **✨AI Code Recommendation System**  <br>
+10. **❌AI-Powered Error Fix Suggestions**  <br>
+11. **🧐AI Code Reviewer**  <br><br>
 ---
 <br><br>
 ### 🎓 Educational Features<br>
