@@ -2,7 +2,7 @@
 ## You can use it on the web by following this link: https://painxl-lang.org/interpreter/  <br><br><br><br><br><br><br><br>
 ## 🔥 PAINXL IDE – Full Feature List (All for $1!) in https://painxl-lang.org<br><br>
 ### 📝 Core Editor Features<br>
-1. **Text Editor**  <br>
+**📝Text Editor**  <br>
 2. **Run in Terminal and Editor Panel**  <br>3. **Find and Replace with `<Match Case>` Option**  <br>4. **Interpreter**  <br>5. **Compiler**  <br>6. **Autocomplete**  <br>
 7. **Settings Centre**<br><br>
 ---
